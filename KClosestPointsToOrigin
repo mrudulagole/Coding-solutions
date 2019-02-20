@@ -1,0 +1,31 @@
+class Solution {
+   class SortbySquaredSum implements Comparator<myClass> { 
+        public int compare(myClass a, myClass b) { 
+            return a.squaredSum - b.squaredSum; 
+        } 
+    }
+    class myClass{
+        int index;
+        int[] point;
+        int squaredSum;
+        
+        myClass(int[] p, int ind){
+            index = ind;
+            point = p;
+            squaredSum = (p[0]*p[0]) + (p[1]*p[1]);
+        }
+    }
+    public int[][] kClosest(int[][] points, int K) {
+        myClass[] arrayOfObjs = new myClass[points.length];
+        for(int i=0; i<points.length; i++){
+            arrayOfObjs[i] = new myClass(points[i], i);
+        }
+        Arrays.sort(arrayOfObjs, new SortbySquaredSum());
+        int[][] result = new int[K][2];
+        for(int i=0; i<K; i++){
+            result[i] = arrayOfObjs[i].point;
+        }
+        return result;
+        
+    }
+}
