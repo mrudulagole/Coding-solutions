@@ -1,0 +1,24 @@
+class Solution {
+    public int[][] matrixReshape(int[][] nums, int r, int c) {
+        if((r*c) == (nums.length*nums[0].length)){
+            int[] arr = new int[nums.length*nums[0].length];
+            int j = 0;
+            System.out.println("nums length: "+nums[0].length);
+            for(int i = 0; i<nums.length; i++){
+                for(int l=0; l<nums[0].length; l++){
+                    arr[j] = nums[i][l];
+                    j++;
+                }
+            }
+            int[][] array = new int[r][c];
+            int y =0;
+            for(int i=0; i<r; i++){
+                for(int k=0; k<c;k++){
+                    array[i][k]=arr[y++];
+                }
+            }
+           return array; 
+        }
+       else return nums;
+    }
+}
