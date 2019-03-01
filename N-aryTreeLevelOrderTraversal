@@ -1,0 +1,42 @@
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> children;
+
+    public Node() {}
+
+    public Node(int _val,List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+
+class Solution {
+    public List<List<Integer>> levelOrder(Node root) {
+        if(root==null)
+            return  new ArrayList<List<Integer>>();
+        Queue<Node> queue=new LinkedList<Node>();
+        queue.add(root);
+        queue.add(null);
+        List<List<Integer>> result=new ArrayList<List<Integer>>();
+        while(!queue.isEmpty()){
+            List<Integer> level = new ArrayList<Integer>();
+            while(queue.peek()!=null){
+                Node current=queue.remove();
+                level.add(current.val);
+                if(current.children.size()!=0){
+                    for(int i = 0; i<current.children.size(); i++){
+                        queue.add(current.children.get(i));
+                    }   
+                }
+            }
+            result.add(level);
+            queue.remove();
+            if(!queue.isEmpty())
+                queue.add(null);
+        }       
+        return result;
+    }
+}
