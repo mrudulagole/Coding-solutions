@@ -6,14 +6,12 @@ class Solution {
             StringBuilder sb = new StringBuilder();
             String s = emails[i];
             boolean skipFlag = false;
-            for( j=0; j<s.indexOf('@')+1; j++){
-                if(s.charAt(j)=='+') skipFlag=true;
-                if(!skipFlag){
+            for( j=0; j<s.length(); j++){
+                if(s.charAt(j)=='+' || s.charAt(j)=='@') break;
                     if(s.charAt(j)!='.')
                         sb.append(s.charAt(j));
-                }
             }
-            sb.append(s.substring(j));
+            sb.append(s.substring(s.indexOf('@')));
             res.add(sb.toString());
         }
         return res.size();
