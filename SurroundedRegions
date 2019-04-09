@@ -1,0 +1,48 @@
+class Solution {
+    public void solve(char[][] board) {
+        if(board.length==0) return;
+        for(int i=0; i<board.length; i++){
+            if(board[i][0]=='O') {
+                markdfs(board, i,0);
+            }
+            if(board[i][board[0].length-1]=='O'){
+                markdfs(board,i,board[0].length-1);
+            } 
+        }
+        for(int j=0; j<board[0].length; j++){
+            if(board[0][j]=='O'){
+                markdfs(board,0,j);
+            } 
+            if(board[board.length-1][j]=='O'){
+                markdfs(board,board.length-1,j);
+            } 
+        }
+        
+        for(int i=0;i<board.length;i++){
+            for(int j=0; j<board[0].length;j++){
+                if(board[i][j] == 'O') dfs(board,i,j);
+            }
+        }
+        for(int i=0;i<board.length;i++){
+            for(int j=0;j<board[0].length;j++){
+                if(board[i][j]=='*') board[i][j]='O';
+            }
+        }
+    }
+    private void markdfs(char[][] board, int i, int j){
+        if(i<0 || j<0 || i>=board.length || j>=board[0].length || board[i][j]!='O') return;
+        board[i][j] = '*';
+        markdfs(board, i+1,j);
+        markdfs(board, i,j+1);
+        markdfs(board, i-1,j);
+        markdfs(board, i,j-1);
+    }
+    private void dfs(char[][] board, int i, int j){
+        if(i<0 || j<0 || i>=board.length || j>=board[0].length || board[i][j]!='O') return;
+        board[i][j]='X';
+        dfs(board, i+1,j);
+        dfs(board, i,j+1);
+        dfs(board, i-1,j);
+        dfs(board, i,j-1);
+    }
+}
